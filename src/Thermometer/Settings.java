@@ -1,43 +1,59 @@
 package Thermometer;
 
-class Settings{
+public class Settings{
     private static final char fahrenheit = 'F';
     private static final char celsius = 'C';
     
-    private double feverLimit;
+    private double upperFeverLimit;
+    private double lowerFeverLimit;
     private char tempUnit;
-    private boolean setToDefault; //a boolean which returns true if the fever limit and temperature unit should be set to its default values
 
-    public Settings(){
+    //has a boolean parameter which returns true if the fever limit and temperature unit should be set to its default values. would only return false if there are saved default values
+    public Settings(boolean setToDefault){
         if(setToDefault){
-
+            toDefault();
         }
-
-        this.feverLimit = feverLimit;
-        this.tempUnit = tempUnit;
+        else{
+            //TODO have user manually set the defaults
+        }
     }
 
     private void toDefault(){
         this.tempUnit=fahrenheit;
-        this.feverLimit=100.4;
+        //TODO may want to change these default fever limit values
+        this.upperFeverLimit=100.4;
+        this.lowerFeverLimit = 94.0;
     }
 
+    public double getUpperFeverLimit() {
+        return upperFeverLimit;
+    }
 
-
+    public double getLowerFeverLimit() {
+        return lowerFeverLimit;
+    }
 
     public char getTempUnit() {
         return tempUnit;
     }
 
-    public double getFeverLimit() {
-        return feverLimit;
+    public void setLowerFeverLimit(double lowerFeverLimit) {
+        this.lowerFeverLimit = lowerFeverLimit;
+    }
+
+    public void setUpperFeverLimit(double upperFeverLimit) {
+        this.upperFeverLimit = upperFeverLimit;
     }
 
     public void setTempUnit(char tempUnit) {
         this.tempUnit = tempUnit;
     }
 
-    public void setFeverLimit(double feverLimit) {
-        this.feverLimit = feverLimit;
+    public static char getCelsius() {
+        return celsius;
+    }
+
+    public static char getFahrenheit() {
+        return fahrenheit;
     }
 }
