@@ -1,0 +1,4 @@
+package Thermometer;
+
+class Sound{
+}
