@@ -1,23 +1,50 @@
 package Thermometer;
 
+/**
+ * A class containing all the settings in the thermometer
+ */
 public class Settings{
+    /**
+     * A char fahrenheit which represents the Fahrenheit temperature unit
+     */
     private static final char fahrenheit = 'F';
+    /**
+     * A char celsius which represents the Celsius temperature unit
+     */
     private static final char celsius = 'C';
-    
+    /**
+     * A double which represents the upper limit of what the thermometer will define as a fever.
+     * Can be changed by the user
+     */
     private double upperFeverLimit;
+    /**
+     * A double which represents the lower limit of what the thermometer will define as a fever.
+     * Can be changed by the user
+     */
     private double lowerFeverLimit;
+    /**
+     * One of either of the two chars specified above that will define which unit the thermometer will display
+     * the temperature in
+     */
     private char tempUnit;
 
-    //has a boolean parameter which returns true if the fever limit and temperature unit should be set to its default values. would only return false if there are saved default values
+    /**
+     * A settings constructor
+     *
+     * @param setToDefault a boolean which returns true if the fever limits and temperature unit should be set to their defaults
+     */
     public Settings(boolean setToDefault){
         if(setToDefault){
             toDefault();
         }
         else{
-            //TODO have user manually set the defaults
+            //TODO take the settings values from a place in storage to be used instead of the defaults
         }
     }
 
+    /**
+     * Sets all the variables to default values if no user settings are found
+     */
     private void toDefault(){
         this.tempUnit=fahrenheit;
         //TODO may want to change these default fever limit values

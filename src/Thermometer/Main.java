@@ -14,7 +14,6 @@ public class Main{
         Settings settings = new Settings(true);
         Scanner scan = new Scanner(System.in);
 
-        //TODO may want to make this a swing gui later on
         while(true){
             System.out.print("What would you like to do? \n[1] Scan Temperature \n[2].. ");
             int input = 0;
@@ -35,6 +34,7 @@ public class Main{
     static void main3(){
         Settings settings = new Settings(true);
         Display display = new Display("Press the Power Button to power on the machine", settings);
+        Memory memory = new Memory();
         JFrame frame = new JFrame("Group Z Thermometer");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(700,100);
@@ -43,7 +43,10 @@ public class Main{
         frame.setVisible(true);
         StringBuilder scan;
 
-        for(;;){
+        boolean power = true; //a boolean which represents the power state of the device
+        //TODO change this to false during the power off method to 'turn off' the device and quit the program
+
+        while(power){
             try {
                 Thread.sleep(100);
                 scan = new StringBuilder("Please wait while the temperature is being measured");
@@ -57,7 +60,7 @@ public class Main{
                         scan.append(".");
                     }
                     display.setScanning(false);
-                    display.scan();
+                    memory.getMeasuredTemperatures().add(display.scan()); //adds the temperature object from scanning to the memory list
                 }
                 frame.repaint();
             } catch (InterruptedException e) {

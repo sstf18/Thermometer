@@ -3,14 +3,34 @@ package Thermometer;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * A class which represents the display of a thermometer
+ */
 public class Display extends JPanel {
 
+    /**
+     * A JButton object which represents the scan button
+     */
     private JButton scanButton;
-    private JTextPane display; //the swing component that displays the text from the toDisplay string
-    private String toDisplay; //the string that is displayed on the pane
+    /**
+     * A JTextPane which shows the text that will be seen by the user
+     */
+    private JTextPane textDisplay;
+    /**
+     * A string that contains what will be shown on the textDisplay
+     */
+    private String toDisplay;
+    /**
+     * A JButton object which represents the powerButton
+     */
     private JButton powerButton;
+    /**
+     * A boolean which returns true if the thermometer is 'scanning' temperatures
+     */
     private boolean scanning;
+    /**
+     * A settings object which contains all the settings for the thermometer
+     */
     private final Settings settings;
 
     public Display(String toDisplay, Settings settings){
@@ -20,26 +40,33 @@ public class Display extends JPanel {
         init();
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
-        display.setText(toDisplay);
+        textDisplay.setText(toDisplay);
     }
 
+    /**
+     * A method that initializes the swing components
+     */
     public void init(){
         //where the text will be displayed
         JPanel screen = new JPanel();
         scanButton = new JButton("Scan Button");
         powerButton = new JButton("Power Button");
-        display = new JTextPane();
-        display.setEditable(false);
-        display.setText(toDisplay);
-        screen.add(display);
+        textDisplay = new JTextPane();
+        textDisplay.setEditable(false);
+        textDisplay.setText(toDisplay);
+        screen.add(textDisplay);
         add(screen);
         add(scanButton);
         add(powerButton);
         initButtons();
     }
 
+    /**
+     * A method that initializes the action listeners for the swing buttons
+     */
     void initButtons(){
         powerButton.addActionListener(this::powerButton);
         scanButton.addActionListener(this::scanButton);
@@ -49,14 +76,17 @@ public class Display extends JPanel {
         Button.powerOn();
     }
 
-
     void scanButton(java.awt.event.ActionEvent evt){
         scanning = true;
     }
 
-    void scan(){
+    /**
+     * A method which simulates the thermometer scanning someone
+     */
+    Temperature scan(){
         Temperature temperature = Button.scanButton(settings);
         toDisplay = temperature.getToDisplay();
+        return temperature;
     }
 
     public boolean isScanning() {
